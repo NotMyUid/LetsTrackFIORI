@@ -1,0 +1,62 @@
+<mvc:View xmlns="sap.m" xmlns:mvc="sap.ui.core.mvc" xmlns:semantic="sap.f.semantic" controllerName="lt.appfiori.controller.Customer">
+
+	<semantic:SemanticPage id="page" headerPinnable="false" toggleHeaderOnTitleClick="false">
+
+		<semantic:titleHeading>
+			<Title text="ltapp"/>
+		</semantic:titleHeading>
+
+		<semantic:content>
+			<Table id="table" width="auto" items="{/Customer}" noDataText="{worklistView>/htableNoDataText}" growing="true" growingScrollToLoad="true" updateFinished=".onUpdateFinished">
+
+				<headerToolbar>
+					<Toolbar>
+						<Title id="tableHeader" text="Customer"/>
+					<content>
+					    <ToolbarSpacer id="spacer1"/>
+                        <Text xmlns="sap.m" text="Search customer:" id="text6"/>
+					    <SearchField id="searchField" tooltip="{i18n>historytSearchTooltip}" search=".onSearch" width="20%" placeholder="Find..">
+						</SearchField>
+					</content>
+					</Toolbar>
+				</headerToolbar>
+
+				<columns>
+					<Column id="column0">
+					    <header>
+					        <Label text="Mail" id="label0"/>
+					    </header>
+					</Column>
+					<Column id="column1">
+					    <header>
+					        <Label text="Name" id="label1"/>
+					    </header>
+					</Column>
+					<Column id="column2">
+					    <header>
+					        <Label text="Password" id="label2"/>
+					    </header>
+					</Column>
+				</columns>
+
+				<items>
+					<ColumnListItem type="Navigation" press=".onPress">
+					<cells>
+					    <Input value="{Mail}" width="100%" id="input5" editable="false"/>
+					    <Input value="{Name}" width="100%" id="input6" editable="false"/>
+					    <Input value="{Password}" width="100%" id="input7" editable="false"/>
+					    
+					</cells>
+					</ColumnListItem>
+				</items>
+			</Table>
+		</semantic:content>
+
+		<semantic:sendEmailAction>
+			<semantic:SendEmailAction id="shareEmail" press=".onShareEmailPress"/>
+		</semantic:sendEmailAction>
+
+
+	</semantic:SemanticPage>
+
+</mvc:View>

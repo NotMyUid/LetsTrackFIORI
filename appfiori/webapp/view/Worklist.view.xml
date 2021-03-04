@@ -1,0 +1,53 @@
+<mvc:View xmlns="sap.m" xmlns:mvc="sap.ui.core.mvc" xmlns:semantic="sap.f.semantic" controllerName="lt.appfiori.controller.Worklist">
+
+	<semantic:SemanticPage id="page" headerPinnable="false" toggleHeaderOnTitleClick="false">
+
+		<semantic:titleHeading>
+			<Title text="{i18n>worklistTitle}"/>
+		</semantic:titleHeading>
+
+		<semantic:content>
+			<Table id="table" width="auto" items="{      path: '/Orders',      sorter: {       path: 'Customer',       descending: false      }     }" noDataText="{worklistView>/tableNoDataText}" growing="true" growingScrollToLoad="true" updateFinished=".onUpdateFinished">
+
+				<headerToolbar>
+					<Toolbar>
+						<Title id="tableHeader" text="Orders"/>
+					<content>
+					    <ToolbarSpacer id="spacer1"/>
+                        <Text xmlns="sap.m" text="Search order:" id="text6"/>
+					    <SearchField id="searchField" tooltip="{i18n>worklistSearchTooltip}" search=".onSearch" width="20%" placeholder="Find..">
+						</SearchField>
+					</content>
+					</Toolbar>
+				</headerToolbar>
+
+				<columns>
+					<Column id="nameColumn">
+					<header>
+					<Text xmlns="sap.m" text="Id" id="unitNumberColumnTitle"/>
+					</header>
+					</Column>
+					<Column id="unitNumberColumn" hAlign="End">
+					<header>
+					<Text text="Customer" id="nameColumnTitle"/>
+					</header>
+					</Column>
+				</columns>
+
+				<items>
+					<ColumnListItem type="Navigation" press=".onPress">
+						<cells><ObjectNumber number="{Id}"/><ObjectIdentifier title="{Customer}"/>
+						</cells>
+					</ColumnListItem>
+				</items>
+			</Table>
+		</semantic:content>
+
+		<semantic:sendEmailAction>
+			<semantic:SendEmailAction id="shareEmail" press=".onShareEmailPress"/>
+		</semantic:sendEmailAction>
+
+
+	</semantic:SemanticPage>
+
+</mvc:View>

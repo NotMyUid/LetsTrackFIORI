@@ -1,0 +1,79 @@
+<mvc:View xmlns="sap.m" xmlns:mvc="sap.ui.core.mvc" xmlns:semantic="sap.f.semantic" controllerName="lt.appfiori.controller.Email"><semantic:SemanticPage id="page" headerPinnable="false" toggleHeaderOnTitleClick="false" busy="{mailView>/busy}" busyIndicatorDelay="{mailView>/delay}">
+
+		<semantic:titleHeading>
+		</semantic:titleHeading>
+
+		<semantic:headerContent>
+		</semantic:headerContent>
+
+		<semantic:sendEmailAction>
+			<semantic:SendEmailAction id="shareEmail" press=".onShareEmailPress"/>
+		</semantic:sendEmailAction>
+
+
+	<semantic:titleContent>
+
+
+	</semantic:titleContent>
+
+
+	<semantic:content>
+
+
+	<Panel xmlns="sap.m" width="auto" expandable="true" expanded="true" id="panel0">
+
+
+	    <headerToolbar>
+
+
+	        <Toolbar id="toolbar1">
+
+
+	            <Title text="AD-HOC Customer Statistics"/>
+
+
+	            <ToolbarSpacer/>
+
+
+	            </Toolbar>
+
+
+	        
+
+
+	    </headerToolbar>
+
+
+	    <content>
+
+
+	        <Label text="Customer mail:" width="100%" id="label0"/>
+
+
+	        <Title xmlns="sap.m" text="{     path: 'Customer'   }" width="100%"/>
+
+
+	        <Label text="Customer name:" width="100%" id="label1"/>
+
+
+	        <ObjectAttribute id="attribute0" text="{Name}"/>
+
+
+	        <Label text="Average days between orders:" width="100%" id="label2"/>
+
+
+	        <ObjectAttribute text="{AVGDays}"/>
+
+
+	        </content>
+
+
+	    </Panel>
+
+
+	</semantic:content>
+
+
+	</semantic:SemanticPage>
+
+</mvc:View>

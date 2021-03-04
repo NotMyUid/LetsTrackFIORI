@@ -1,0 +1,1343 @@
+<edmx:Edmx xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx" Version="4.0">
+<edmx:Reference Uri="https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Core.V1.xml">
+<edmx:Include Alias="Core" Namespace="Org.OData.Core.V1"/>
+</edmx:Reference>
+<edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/UI.xml">
+<edmx:Include Alias="UI" Namespace="com.sap.vocabularies.UI.v1"/>
+</edmx:Reference>
+<edmx:DataServices>
+<Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="letstrackservice">
+<EntityContainer Name="EntityContainer">
+<EntitySet Name="Carrier" EntityType="letstrackservice.Carrier"/>
+<EntitySet Name="City" EntityType="letstrackservice.City"/>
+<EntitySet Name="Connection" EntityType="letstrackservice.Connection"/>
+<EntitySet Name="Connection_Statistics" EntityType="letstrackservice.Connection_Statistics"/>
+<EntitySet Name="Customer" EntityType="letstrackservice.Customer"/>
+<EntitySet Name="Customer_Statistics" EntityType="letstrackservice.Customer_Statistics"/>
+<EntitySet Name="History" EntityType="letstrackservice.History"/>
+<EntitySet Name="History_Statistics" EntityType="letstrackservice.History_Statistics"/>
+<EntitySet Name="Hub" EntityType="letstrackservice.Hub"/>
+<EntitySet Name="OrdStat" EntityType="letstrackservice.OrdStat"/>
+<EntitySet Name="Orders" EntityType="letstrackservice.Orders"/>
+<EntitySet Name="Orders_Statistics" EntityType="letstrackservice.Orders_Statistics"/>
+<EntitySet Name="Route" EntityType="letstrackservice.Route"/>
+<EntitySet Name="Route_Statistics" EntityType="letstrackservice.Route_Statistics"/>
+<EntitySet Name="StatCust" EntityType="letstrackservice.StatCust"/>
+<EntitySet Name="Sub_Route" EntityType="letstrackservice.Sub_Route"/>
+<EntitySet Name="Sub_Route_Statistics" EntityType="letstrackservice.Sub_Route_Statistics"/>
+</EntityContainer>
+<EntityType Name="Carrier">
+<Key>
+<PropertyRef Name="Id"/>
+</Key>
+<Property Name="Id" Type="Edm.Int32" Nullable="false"/>
+<Property Name="Name" Type="Edm.String" MaxLength="100"/>
+<Property Name="Cost" Type="Edm.Int32"/>
+</EntityType>
+<EntityType Name="City">
+<Key>
+<PropertyRef Name="Id"/>
+</Key>
+<Property Name="Id" Type="Edm.Int32" Nullable="false"/>
+<Property Name="Name" Type="Edm.String" MaxLength="100"/>
+<Property Name="Location" Type="Edm.String" MaxLength="200"/>
+</EntityType>
+<EntityType Name="Connection">
+<Key>
+<PropertyRef Name="Route"/>
+<PropertyRef Name="Sub_Route"/>
+</Key>
+<Property Name="Route" Type="Edm.Int32" Nullable="false"/>
+<Property Name="Sub_Route" Type="Edm.Int32" Nullable="false"/>
+</EntityType>
+<EntityType Name="Connection_Statistics">
+<Property Name="AVGConnection" Type="Edm.Decimal" Scale="6" Precision="25"/>
+</EntityType>
+<EntityType Name="Customer">
+<Key>
+<PropertyRef Name="Mail"/>
+</Key>
+<Property Name="Mail" Type="Edm.String" MaxLength="100" Nullable="false"/>
+<Property Name="Name" Type="Edm.String" MaxLength="100"/>
+<Property Name="Password" Type="Edm.String" MaxLength="100"/>
+</EntityType>
+<EntityType Name="Customer_Statistics">
+<Property Name="AVGLenM" Type="Edm.Decimal" Scale="6" Precision="16"/>
+<Property Name="AVGLenN" Type="Edm.Decimal" Scale="6" Precision="16"/>
+<Property Name="AVGLenP" Type="Edm.Decimal" Scale="6" Precision="16"/>
+</EntityType>
+<EntityType Name="History">
+<Key>
+<PropertyRef Name="Id"/>
+<PropertyRef Name="Order_"/>
+</Key>
+<Property Name="Id" Type="Edm.Int32" Nullable="false"/>
+<Property Name="Order_" Type="Edm.Int32" Nullable="false"/>
+<Property Name="City" Type="Edm.Int32"/>
+<Property Name="Time" Type="Edm.TimeOfDay"/>
+<Property Name="Date" Type="Edm.Date"/>
+</EntityType>
+<EntityType Name="History_Statistics">
+<Property Name="AVGCity" Type="Edm.Decimal" Scale="6" Precision="25"/>
+</EntityType>
+<EntityType Name="Hub">
+<Key>
+<PropertyRef Name="Id"/>
+</Key>
+<Property Name="Id" Type="Edm.Int32" Nullable="false"/>
+<Property Name="City" Type="Edm.Int32"/>
+<Property Name="Employees" Type="Edm.Int32"/>
+</EntityType>
+<EntityType Name="OrdStat">
+<Property Name="AVGOrders" Type="Edm.Decimal" Scale="6" Precision="25"/>
+<Property Name="MFHub" Type="Edm.Int32"/>
+<Property Name="AVGDistance" Type="Edm.Decimal" Scale="6" Precision="25"/>
+<Property Name="AVGTime" Type="Edm.Decimal" Scale="6" Precision="25"/>
+</EntityType>
+<EntityType Name="Orders">
+<Key>
+<PropertyRef Name="Id"/>
+</Key>
+<Property Name="Id" Type="Edm.Int32" Nullable="false"/>
+<Property Name="Customer" Type="Edm.String" MaxLength="100"/>
+<Property Name="Hub" Type="Edm.Int32"/>
+<Property Name="Route" Type="Edm.Int32"/>
+<Property Name="Carrier" Type="Edm.Int32"/>
+<Property Name="Time" Type="Edm.TimeOfDay"/>
+<Property Name="Date" Type="Edm.Date"/>
+</EntityType>
+<EntityType Name="Orders_Statistics">
+<Property Name="AVGOrders" Type="Edm.Decimal" Scale="6" Precision="25"/>
+<Property Name="MFHub" Type="Edm.Int32"/>
+<Property Name="AVGDistance" Type="Edm.Decimal" Scale="6" Precision="25"/>
+<Property Name="AVGTime" Type="Edm.Decimal" Scale="6" Precision="25"/>
+</EntityType>
+<EntityType Name="Route">
+<Key>
+<PropertyRef Name="Id"/>
+</Key>
+<Property Name="Id" Type="Edm.Int32" Nullable="false"/>
+<Property Name="Time" Type="Edm.Int32"/>
+<Property Name="Distance" Type="Edm.Int32"/>
+</EntityType>
+<EntityType Name="Route_Statistics">
+<Property Name="AVGDistance" Type="Edm.Decimal" Scale="6" Precision="16"/>
+<Property Name="AVGTime" Type="Edm.Decimal" Scale="6" Precision="16"/>
+</EntityType>
+<EntityType Name="StatCust">
+<key>
+<PropertyRef Name="Customer"/>
+</key>
+<Property Name="Customer" Type="Edm.String"/>
+<Property Name="Name" Type="Edm.String"/>
+<Property Name="AVGDays" Type="Edm.Decimal" Scale="6" Precision="13"/>
+</EntityType>
+<EntityType Name="Sub_Route">
+<Key>
+<PropertyRef Name="Id"/>
+</Key>
+<Property Name="Id" Type="Edm.Int32" Nullable="false"/>
+<Property Name="Starts" Type="Edm.Int32"/>
+<Property Name="Ends" Type="Edm.Int32"/>
+<Property Name="Time" Type="Edm.Int32"/>
+<Property Name="Distance" Type="Edm.Int32"/>
+</EntityType>
+<EntityType Name="Sub_Route_Statistics">
+<Property Name="AVGDistance" Type="Edm.Decimal" Scale="6" Precision="16"/>
+<Property Name="AVGTime" Type="Edm.Decimal" Scale="6" Precision="16"/>
+</EntityType>
+<Annotations Target="letstrackservice.Carrier">
+<Annotation Term="UI.Facets">
+<Collection>
+<Record Type="UI.CollectionFacet">
+<PropertyValue Property="Label" String="Value Info"/>
+<PropertyValue Property="Facets">
+<Collection>
+<Record Type="UI.ReferenceFacet">
+<PropertyValue Property="Target" AnnotationPath="@UI.FieldGroup#Main"/>
+<PropertyValue Property="Label" String="Main Facet"/>
+</Record>
+</Collection>
+</PropertyValue>
+</Record>
+</Collection>
+</Annotation>
+<Annotation Term="UI.FieldGroup" Qualifier="Main">
+<Record Type="UI.FieldGroupType">
+<PropertyValue Property="Data">
+<Collection>
+<Record Type="UI.DataField">
+<PropertyValue Property="Value" Path="Id"/>
+</Record>
+<Record Type="UI.DataField">
+<PropertyValue Property="Value" Path="Name"/>
+</Record>
+<Record Type="UI.DataField">
+<PropertyValue Property="Value" Path="Cost"/>
+</Record>
+</Collection>
+</PropertyValue>
+</Record>
+</Annotation>
+<Annotation Term="UI.HeaderInfo">
+<Record Type="UI.HeaderInfoType">
+<PropertyValue Property="Description">
+<Record Type="UI.DataField">
+<PropertyValue Property="Value" Path="Name"/>
+</Record>
+</PropertyValue>
+<PropertyValue Property="Title">
+<Record Type="UI.DataField">
+<PropertyValue Property="Value" Path="Id"/>
+</Record>
+</PropertyValue>
+<PropertyValue Property="TypeName" String="Carrier"/>
+<PropertyValue Property="TypeNamePlural" String="Carriers"/>
+</Record>
+</Annotation>
+<Annotation Term="UI.LineItem">
+<Collection>
+<Record Type="UI.DataField">
+<PropertyValue Property="Value" Path="Id"/>
+</Record>
+<Record Type="UI.DataField">
+<PropertyValue Property="Value" Path="Name"/>
+</Record>
+<Record Type="UI.DataField">
+<PropertyValue Property="Value" Path="Cost"/>
+</Record>
+</Collection>
+</Annotation>
+<Annotation Term="UI.SelectionFields">
+<Collection>
+<PropertyPath>Id</PropertyPath>
+<PropertyPath>Name</PropertyPath>
+<PropertyPath>Cost</PropertyPath>
+</Collection>
+</Annotation>
+</Annotations>
+<Annotations Target="letstrackservice.City">
+<Annotation Term="UI.Facets">
+<Collection>
+<Record Type="UI.CollectionFacet">
+<PropertyValue Property="Label" String="Value Info"/>
+<PropertyValue Property="Facets">
+<Collection>
+<Record Type="UI.ReferenceFacet">
+<PropertyValue Property="Target" AnnotationPath="@UI.FieldGroup#Main"/>
+<PropertyValue Property="Label" String="Main Facet"/>
+</Record>
+</Collection>
+</PropertyValue>
+</Record>
+</Collection>
+</Annotation>
+<Annotation Term="UI.FieldGroup" Qualifier="Main">
+<Record Type="UI.FieldGroupType">
+<PropertyValue Property="Data">
+<Collection>
+<Record Type="UI.DataField">
+<PropertyValue Property="Value" Path="Id"/>
+</Record>
+<Record Type="UI.DataField">
+<PropertyValue Property="Value" Path="Name"/>
+</Record>
+<Record Type="UI.DataField">
+<PropertyValue Property="Value" Path="Location"/>
+</Record>
+</Collection>
+</PropertyValue>
+</Record>
+</Annotation>
+<Annotation Term="UI.HeaderInfo">
+<Record Type="UI.HeaderInfoType">
+<PropertyValue Property="Description">
+<Record Type="UI.DataField">
+<PropertyValue Property="Value" Path="Name"/>
+</Record>
+</PropertyValue>
+<PropertyValue Property="Title">
+<Record Type="UI.DataField">
+<PropertyValue Property="Value" Path="Id"/>
+</Record>
+</PropertyValue>
+<PropertyValue Property="TypeName" String="City"/>
+<PropertyValue Property="TypeNamePlural" String="Cities"/>
+</Record>
+</Annotation>
+<Annotation Term="UI.LineItem">
+<Collection>
+<Record Type="UI.DataField">
+<PropertyValue Property="Value" Path="Id"/>
+</Record>
+<Record Type="UI.DataField">
+<PropertyValue Property="Value" Path="Name"/>
+</Record>
+<Record Type="UI.DataField">
+<PropertyValue Property="Value" Path="Location"/>
+</Record>
+</Collection>
+</Annotation>
+<Annotation Term="UI.SelectionFields">
+<Collection>
+<PropertyPath>Id</PropertyPath>
+<PropertyPath>Name</PropertyPath>
+<PropertyPath>Location</PropertyPath>
+</Collection>
+</Annotation>
+</Annotations>
+<Annotations Target="letstrackservice.Connection">
+<Annotation Term="UI.Facets">
+<Collection>
+<Record Type="UI.CollectionFacet">
+<PropertyValue Property="Label" String="Value Info"/>
+<PropertyValue Property="Facets">
+<Collection>
+<Record Type="UI.ReferenceFacet">
+<PropertyValue Property="Target" AnnotationPath="@UI.FieldGroup#Main"/>
+<PropertyValue Property="Label" String="Main Facet"/>
+</Record>
+</Collection>
+</PropertyValue>
+</Record>
+</Collection>
+</Annotation>
+<Annotation Term="UI.FieldGroup" Qualifier="Main">
+<Record Type="UI.FieldGroupType">
+<PropertyValue Property="Data">
+<Collection>
+<Record Type="UI.DataField">
+<PropertyValue Property="Value" Path="Route"/>
+</Record>
+<Record Type="UI.DataField">
+<PropertyValue Property="Value" Path="Sub_Route"/>
+</Record>
+</Collection>
+</PropertyValue>
+</Record>
+</Annotation>
+<Annotation Term="UI.HeaderInfo">
+<Record Type="UI.HeaderInfoType">
+<PropertyValue Property="Description">
+<Record Type="UI.DataField">
+<PropertyValue Property="Value" Path="Sub_Route"/>
+</Record>
+</PropertyValue>
+<PropertyValue Property="Title">
+<Record Type="UI.DataField">
+<PropertyValue Property="Value" Path="Route"/>
+</Record>
+</PropertyValue>
+<PropertyValue Property="TypeName" String="Connection"/>
+<PropertyValue Property="TypeNamePlural" String="Connections"/>
+</Record>
+</Annotation>
+<Annotation Term="UI.LineItem">
+<Collection>
+<Record Type="UI.DataField">
+<PropertyValue Property="Value" Path="Route"/>
+</Record>
+<Record Type="UI.DataField">
+<PropertyValue Property="Value" Path="Sub_Route"/>
+</Record>
+</Collection>
+</Annotation>
+<Annotation Term="UI.SelectionFields">
+<Collection>
+<PropertyPath>Route</PropertyPath>
+<PropertyPath>Sub_Route</PropertyPath>
+</Collection>
+</Annotation>
+</Annotations>
+<Annotations Target="letstrackservice.Connection_Statistics">
+<Annotation Term="UI.Facets">
+<Collection>
+<Record Type="UI.CollectionFacet">
+<PropertyValue Property="Label" String="Value Info"/>
+<PropertyValue Property="Facets">
+<Collection>
+<Record Type="UI.ReferenceFacet">
+<PropertyValue Property="Target" AnnotationPath="@UI.FieldGroup#Main"/>
+<PropertyValue Property="Label" String="Main Facet"/>
+</Record>
+</Collection>
+</PropertyValue>
+</Record>
+</Collection>
+</Annotation>
+<Annotation Term="UI.FieldGroup" Qualifier="Main">
+<Record Type="UI.FieldGroupType">
+<PropertyValue Property="Data">
+<Collection>
+<Record Type="UI.DataField">
+<PropertyValue Property="Value" Path="AVGConnection"/>
+</Record>
+</Collection>
+</PropertyValue>
+</Record>
+</Annotation>
+<Annotation Term="UI.HeaderInfo">
+<Record Type="UI.HeaderInfoType">
+<PropertyValue Property="Title">
+<Record Type="UI.DataField">
+<PropertyValue Property="Value" Path="AVGConnection"/>
+</Record>
+</PropertyValue>
+<PropertyValue Property="TypeName" String="Connection_Statistic"/>
+<PropertyValue Property="TypeNamePlural" String="Connection_Statistics"/>
+</Record>
+</Annotation>
+<Annotation Term="UI.LineItem">
+<Collection>
+<Record Type="UI.DataField">
+<PropertyValue Property="Value" Path="AVGConnection"/>
+</Record>
+</Collection>
+</Annotation>
+<Annotation Term="UI.SelectionFields">
+<Collection>
+<PropertyPath>AVGConnection</PropertyPath>
+</Collection>
+</Annotation>
+</Annotations>
+<Annotations Target="letstrackservice.Connection_Statistics/AVGConnection">
+<Annotation Term="Core.Computed" Bool="true"/>
+</Annotations>
+<Annotations Target="letstrackservice.Customer">
+<Annotation Term="UI.Facets">
+<Collection>
+<Record Type="UI.CollectionFacet">
+<PropertyValue Property="Label" String="Value Info"/>
+<PropertyValue Property="Facets">
+<Collection>
+<Record Type="UI.ReferenceFacet">
+<PropertyValue Property="Target" AnnotationPath="@UI.FieldGroup#Main"/>
+<PropertyValue Property="Label" String="Main Facet"/>
+</Record>
+</Collection>
+</PropertyValue>
+</Record>
+</Collection>
+</Annotation>
+<Annotation Term="UI.FieldGroup" Qualifier="Main">
+<Record Type="UI.FieldGroupType">
+<PropertyValue Property="Data">
+<Collection>
+<Record Type="UI.DataField">
+<PropertyValue Property="Value" Path="Mail"/>
+</Record>
+<Record Type="UI.DataField">
+<PropertyValue Property="Value" Path="Name"/>
+</Record>
+</Collection>
+</PropertyValue>
+</Record>
+</Annotation>
+<Annotation Term="UI.HeaderInfo">
+<Record Type="UI.HeaderInfoType">
+<PropertyValue Property="Description">
+<Record Type="UI.DataField">
+<PropertyValue Property="Value" Path="Name"/>
+</Record>
+</PropertyValue>
+<PropertyValue Property="Title">
+<Record Type="UI.DataField">
+<PropertyValue Property="Value" Path="Mail"/>
+</Record>
+</PropertyValue>
+<PropertyValue Property="TypeName" String="Customer"/>
+<PropertyValue Property="TypeNamePlural" String="Customers"/>
+</Record>
+</Annotation>
+<Annotation Term="UI.LineItem">
+<Collection>
+<Record Type="UI.DataField">
+<PropertyValue Property="Value" Path="Mail"/>
+</Record>
+<Record Type="UI.DataField">
+<PropertyValue Property="Value" Path="Name"/>
+</Record>
+</Collection>
+</Annotation>
+<Annotation Term="UI.SelectionFields">
+<Collection>
+<PropertyPath>Mail</PropertyPath>
+<PropertyPath>Name</PropertyPath>
+</Collection>
+</Annotation>
+</Annotations>
+<Annotations Target="letstrackservice.Customer_Statistics">
+<Annotation Term="UI.Facets">
+<Collection>
+<Record Type="UI.CollectionFacet">
+<PropertyValue Property="Label" String="Value Info"/>
+<PropertyValue Property="Facets">
+<Collection>
+<Record Type="UI.ReferenceFacet">
+<PropertyValue Property="Target" AnnotationPath="@UI.FieldGroup#Main"/>
+<PropertyValue Property="Label" String="Main Facet"/>
+</Record>
+</Collection>
+</PropertyValue>
+</Record>
+</Collection>
+</Annotation>
+<Annotation Term="UI.FieldGroup" Qualifier="Main">
+<Record Type="UI.FieldGroupType">
+<PropertyValue Property="Data">
+<Collection>
+<Record Type="UI.DataField">
+<PropertyValue Property="Value" Path="AVGLenM"/>
+</Record>
+<Record Type="UI.DataField">
+<PropertyValue Property="Value" Path="AVGLenN"/>
+</Record>
+<Record Type="UI.DataField">
+<PropertyValue Property="Value" Path="AVGLenP"/>
+</Record>
+</Collection>
+</PropertyValue>
+</Record>
+</Annotation>
+<Annotation Term="UI.HeaderInfo">
+<Record Type="UI.HeaderInfoType">
+<PropertyValue Property="Title">
+<Record Type="UI.DataField">
+<PropertyValue Property="Value" Path="AVGLenM"/>
+</Record>
+</PropertyValue>
+<PropertyValue Property="TypeName" String="Customer_Statistic"/>
+<PropertyValue Property="TypeNamePlural" String="Customer_Statistics"/>
+</Record>
+</Annotation>
+<Annotation Term="UI.LineItem">
+<Collection>
+<Record Type="UI.DataField">
+<PropertyValue Property="Value" Path="AVGLenM"/>
+</Record>
+<Record Type="UI.DataField">
+<PropertyValue Property="Value" Path="AVGLenN"/>
+</Record>
+<Record Type="UI.DataField">
+<PropertyValue Property="Value" Path="AVGLenP"/>
+</Record>
+</Collection>
+</Annotation>
+<Annotation Term="UI.SelectionFields">
+<Collection>
+<PropertyPath>AVGLenM</PropertyPath>
+<PropertyPath>AVGLenN</PropertyPath>
+<PropertyPath>AVGLenP</PropertyPath>
+</Collection>
+</Annotation>
+</Annotations>
+<Annotations Target="letstrackservice.Customer_Statistics/AVGLenM">
+<Annotation Term="Core.Computed" Bool="true"/>
+</Annotations>
+<Annotations Target="letstrackservice.Customer_Statistics/AVGLenN">
+<Annotation Term="Core.Computed" Bool="true"/>
+</Annotations>
+<Annotations Target="letstrackservice.Customer_Statistics/AVGLenP">
+<Annotation Term="Core.Computed" Bool="true"/>
+</Annotations>
+<Annotations Target="letstrackservice.History">
+<Annotation Term="UI.Facets">
+<Collection>
+<Record Type="UI.CollectionFacet">
+<PropertyValue Property="Label" String="Value Info"/>
+<PropertyValue Property="Facets">
+<Collection>
+<Record Type="UI.ReferenceFacet">
+<PropertyValue Property="Target" AnnotationPath="@UI.FieldGroup#Main"/>
+<PropertyValue Property="Label" String="Main Facet"/>
+</Record>
+</Collection>
+</PropertyValue>
+</Record>
+</Collection>
+</Annotation>
+<Annotation Term="UI.FieldGroup" Qualifier="Main">
+<Record Type="UI.FieldGroupType">
+<PropertyValue Property="Data">
+<Collection>
+<Record Type="UI.DataField">
+<PropertyValue Property="Value" Path="Id"/>
+</Record>
+<Record Type="UI.DataField">
+<PropertyValue Property="Value" Path="Order_"/>
+</Record>
+<Record Type="UI.DataField">
+<PropertyValue Property="Value" Path="City"/>
+</Record>
+<Record Type="UI.DataField">
+<PropertyValue Property="Value" Path="Time"/>
+</Record>
+<Record Type="UI.DataField">
+<PropertyValue Property="Value" Path="Date"/>
+</Record>
+</Collection>
+</PropertyValue>
+</Record>
+</Annotation>
+<Annotation Term="UI.HeaderInfo">
+<Record Type="UI.HeaderInfoType">
+<PropertyValue Property="Description">
+<Record Type="UI.DataField">
+<PropertyValue Property="Value" Path="Order_"/>
+</Record>
+</PropertyValue>
+<PropertyValue Property="Title">
+<Record Type="UI.DataField">
+<PropertyValue Property="Value" Path="Id"/>
+</Record>
+</PropertyValue>
+<PropertyValue Property="TypeName" String="History"/>
+<PropertyValue Property="TypeNamePlural" String="Histories"/>
+</Record>
+</Annotation>
+<Annotation Term="UI.LineItem">
+<Collection>
+<Record Type="UI.DataField">
+<PropertyValue Property="Value" Path="Id"/>
+</Record>
+<Record Type="UI.DataField">
+<PropertyValue Property="Value" Path="Order_"/>
+</Record>
+<Record Type="UI.DataField">
+<PropertyValue Property="Value" Path="City"/>
+</Record>
+<Record Type="UI.DataField">
+<PropertyValue Property="Value" Path="Time"/>
+</Record>
+<Record Type="UI.DataField">
+<PropertyValue Property="Value" Path="Date"/>
+</Record>
+</Collection>
+</Annotation>
+<Annotation Term="UI.SelectionFields">
+<Collection>
+<PropertyPath>Id</PropertyPath>
+<PropertyPath>Order_</PropertyPath>
+<PropertyPath>City</PropertyPath>
+<PropertyPath>Time</PropertyPath>
+<PropertyPath>Date</PropertyPath>
+</Collection>
+</Annotation>
+</Annotations>
+<Annotations Target="letstrackservice.History_Statistics">
+<Annotation Term="UI.Facets">
+<Collection>
+<Record Type="UI.CollectionFacet">
+<PropertyValue Property="Label" String="Value Info"/>
+<PropertyValue Property="Facets">
+<Collection>
+<Record Type="UI.ReferenceFacet">
+<PropertyValue Property="Target" AnnotationPath="@UI.FieldGroup#Main"/>
+<PropertyValue Property="Label" String="Main Facet"/>
+</Record>
+</Collection>
+</PropertyValue>
+</Record>
+</Collection>
+</Annotation>
+<Annotation Term="UI.FieldGroup" Qualifier="Main">
+<Record Type="UI.FieldGroupType">
+<PropertyValue Property="Data">
+<Collection>
+<Record Type="UI.DataField">
+<PropertyValue Property="Value" Path="AVGCity"/>
+</Record>
+</Collection>
+</PropertyValue>
+</Record>
+</Annotation>
+<Annotation Term="UI.HeaderInfo">
+<Record Type="UI.HeaderInfoType">
+<PropertyValue Property="Title">
+<Record Type="UI.DataField">
+<PropertyValue Property="Value" Path="AVGCity"/>
+</Record>
+</PropertyValue>
+<PropertyValue Property="TypeName" String="History_Statistic"/>
+<PropertyValue Property="TypeNamePlural" String="History_Statistics"/>
+</Record>
+</Annotation>
+<Annotation Term="UI.LineItem">
+<Collection>
+<Record Type="UI.DataField">
+<PropertyValue Property="Value" Path="AVGCity"/>
+</Record>
+</Collection>
+</Annotation>
+<Annotation Term="UI.SelectionFields">
+<Collection>
+<PropertyPath>AVGCity</PropertyPath>
+</Collection>
+</Annotation>
+</Annotations>
+<Annotations Target="letstrackservice.History_Statistics/AVGCity">
+<Annotation Term="Core.Computed" Bool="true"/>
+</Annotations>
+<Annotations Target="letstrackservice.Hub">
+<Annotation Term="UI.Facets">
+<Collection>
+<Record Type="UI.CollectionFacet">
+<PropertyValue Property="Label" String="Value Info"/>
+<PropertyValue Property="Facets">
+<Collection>
+<Record Type="UI.ReferenceFacet">
+<PropertyValue Property="Target" AnnotationPath="@UI.FieldGroup#Main"/>
+<PropertyValue Property="Label" String="Main Facet"/>
+</Record>
+</Collection>
+</PropertyValue>
+</Record>
+</Collection>
+</Annotation>
+<Annotation Term="UI.FieldGroup" Qualifier="Main">
+<Record Type="UI.FieldGroupType">
+<PropertyValue Property="Data">
+<Collection>
+<Record Type="UI.DataField">
+<PropertyValue Property="Value" Path="Id"/>
+</Record>
+<Record Type="UI.DataField">
+<PropertyValue Property="Value" Path="City"/>
+</Record>
+<Record Type="UI.DataField">
+<PropertyValue Property="Value" Path="Employees"/>
+</Record>
+</Collection>
+</PropertyValue>
+</Record>
+</Annotation>
+<Annotation Term="UI.HeaderInfo">
+<Record Type="UI.HeaderInfoType">
+<PropertyValue Property="Description">
+<Record Type="UI.DataField">
+<PropertyValue Property="Value" Path="City"/>
+</Record>
+</PropertyValue>
+<PropertyValue Property="Title">
+<Record Type="UI.DataField">
+<PropertyValue Property="Value" Path="Id"/>
+</Record>
+</PropertyValue>
+<PropertyValue Property="TypeName" String="Hub"/>
+<PropertyValue Property="TypeNamePlural" String="Hubs"/>
+</Record>
+</Annotation>
+<Annotation Term="UI.LineItem">
+<Collection>
+<Record Type="UI.DataField">
+<PropertyValue Property="Value" Path="Id"/>
+</Record>
+<Record Type="UI.DataField">
+<PropertyValue Property="Value" Path="City"/>
+</Record>
+<Record Type="UI.DataField">
+<PropertyValue Property="Value" Path="Employees"/>
+</Record>
+</Collection>
+</Annotation>
+<Annotation Term="UI.SelectionFields">
+<Collection>
+<PropertyPath>Id</PropertyPath>
+<PropertyPath>City</PropertyPath>
+<PropertyPath>Employees</PropertyPath>
+</Collection>
+</Annotation>
+</Annotations>
+<Annotations Target="letstrackservice.OrdStat">
+<Annotation Term="UI.Facets">
+<Collection>
+<Record Type="UI.CollectionFacet">
+<PropertyValue Property="Label" String="Value Info"/>
+<PropertyValue Property="Facets">
+<Collection>
+<Record Type="UI.ReferenceFacet">
+<PropertyValue Property="Target" AnnotationPath="@UI.FieldGroup#Main"/>
+<PropertyValue Property="Label" String="Main Facet"/>
+</Record>
+</Collection>
+</PropertyValue>
+</Record>
+</Collection>
+</Annotation>
+<Annotation Term="UI.FieldGroup" Qualifier="Main">
+<Record Type="UI.FieldGroupType">
+<PropertyValue Property="Data">
+<Collection>
+<Record Type="UI.DataField">
+<PropertyValue Property="Value" Path="AVGOrders"/>
+</Record>
+<Record Type="UI.DataField">
+<PropertyValue Property="Value" Path="MFHub"/>
+</Record>
+<Record Type="UI.DataField">
+<PropertyValue Property="Value" Path="AVGDistance"/>
+</Record>
+<Record Type="UI.DataField">
+<PropertyValue Property="Value" Path="AVGTime"/>
+</Record>
+</Collection>
+</PropertyValue>
+</Record>
+</Annotation>
+<Annotation Term="UI.HeaderInfo">
+<Record Type="UI.HeaderInfoType">
+<PropertyValue Property="Title">
+<Record Type="UI.DataField">
+<PropertyValue Property="Value" Path="AVGOrders"/>
+</Record>
+</PropertyValue>
+<PropertyValue Property="TypeName" String="Orders_Statistic"/>
+<PropertyValue Property="TypeNamePlural" String="Orders_Statistics"/>
+</Record>
+</Annotation>
+<Annotation Term="UI.LineItem">
+<Collection>
+<Record Type="UI.DataField">
+<PropertyValue Property="Value" Path="AVGOrders"/>
+</Record>
+<Record Type="UI.DataField">
+<PropertyValue Property="Value" Path="MFHub"/>
+</Record>
+<Record Type="UI.DataField">
+<PropertyValue Property="Value" Path="AVGDistance"/>
+</Record>
+<Record Type="UI.DataField">
+<PropertyValue Property="Value" Path="AVGTime"/>
+</Record>
+</Collection>
+</Annotation>
+<Annotation Term="UI.SelectionFields">
+<Collection>
+<PropertyPath>AVGOrders</PropertyPath>
+<PropertyPath>MFHub</PropertyPath>
+<PropertyPath>AVGDistance</PropertyPath>
+<PropertyPath>AVGTime</PropertyPath>
+</Collection>
+</Annotation>
+</Annotations>
+<Annotations Target="letstrackservice.Orders">
+<Annotation Term="UI.Facets">
+<Collection>
+<Record Type="UI.CollectionFacet">
+<PropertyValue Property="Label" String="Value Info"/>
+<PropertyValue Property="Facets">
+<Collection>
+<Record Type="UI.ReferenceFacet">
+<PropertyValue Property="Target" AnnotationPath="@UI.FieldGroup#Main"/>
+<PropertyValue Property="Label" String="Main Facet"/>
+</Record>
+</Collection>
+</PropertyValue>
+</Record>
+</Collection>
+</Annotation>
+<Annotation Term="UI.FieldGroup" Qualifier="Main">
+<Record Type="UI.FieldGroupType">
+<PropertyValue Property="Data">
+<Collection>
+<Record Type="UI.DataField">
+<PropertyValue Property="Value" Path="Id"/>
+</Record>
+<Record Type="UI.DataField">
+<PropertyValue Property="Value" Path="Customer"/>
+</Record>
+<Record Type="UI.DataField">
+<PropertyValue Property="Value" Path="Hub"/>
+</Record>
+<Record Type="UI.DataField">
+<PropertyValue Property="Value" Path="Route"/>
+</Record>
+<Record Type="UI.DataField">
+<PropertyValue Property="Value" Path="Carrier"/>
+</Record>
+<Record Type="UI.DataField">
+<PropertyValue Property="Value" Path="Time"/>
+</Record>
+<Record Type="UI.DataField">
+<PropertyValue Property="Value" Path="Date"/>
+</Record>
+</Collection>
+</PropertyValue>
+</Record>
+</Annotation>
+<Annotation Term="UI.HeaderInfo">
+<Record Type="UI.HeaderInfoType">
+<PropertyValue Property="Description">
+<Record Type="UI.DataField">
+<PropertyValue Property="Value" Path="Customer"/>
+</Record>
+</PropertyValue>
+<PropertyValue Property="Title">
+<Record Type="UI.DataField">
+<PropertyValue Property="Value" Path="Id"/>
+</Record>
+</PropertyValue>
+<PropertyValue Property="TypeName" String="Orders"/>
+<PropertyValue Property="TypeNamePlural" String="Orders"/>
+</Record>
+</Annotation>
+<Annotation Term="UI.LineItem">
+<Collection>
+<Record Type="UI.DataField">
+<PropertyValue Property="Value" Path="Id"/>
+</Record>
+<Record Type="UI.DataField">
+<PropertyValue Property="Value" Path="Customer"/>
+</Record>
+<Record Type="UI.DataField">
+<PropertyValue Property="Value" Path="Hub"/>
+</Record>
+<Record Type="UI.DataField">
+<PropertyValue Property="Value" Path="Route"/>
+</Record>
+<Record Type="UI.DataField">
+<PropertyValue Property="Value" Path="Carrier"/>
+</Record>
+<Record Type="UI.DataField">
+<PropertyValue Property="Value" Path="Time"/>
+</Record>
+<Record Type="UI.DataField">
+<PropertyValue Property="Value" Path="Date"/>
+</Record>
+</Collection>
+</Annotation>
+<Annotation Term="UI.SelectionFields">
+<Collection>
+<PropertyPath>Id</PropertyPath>
+<PropertyPath>Customer</PropertyPath>
+<PropertyPath>Hub</PropertyPath>
+<PropertyPath>Route</PropertyPath>
+<PropertyPath>Carrier</PropertyPath>
+<PropertyPath>Time</PropertyPath>
+<PropertyPath>Date</PropertyPath>
+</Collection>
+</Annotation>
+</Annotations>
+<Annotations Target="letstrackservice.Orders_Statistics">
+<Annotation Term="UI.Facets">
+<Collection>
+<Record Type="UI.CollectionFacet">
+<PropertyValue Property="Label" String="Value Info"/>
+<PropertyValue Property="Facets">
+<Collection>
+<Record Type="UI.ReferenceFacet">
+<PropertyValue Property="Target" AnnotationPath="@UI.FieldGroup#Main"/>
+<PropertyValue Property="Label" String="Main Facet"/>
+</Record>
+</Collection>
+</PropertyValue>
+</Record>
+</Collection>
+</Annotation>
+<Annotation Term="UI.FieldGroup" Qualifier="Main">
+<Record Type="UI.FieldGroupType">
+<PropertyValue Property="Data">
+<Collection>
+<Record Type="UI.DataField">
+<PropertyValue Property="Value" Path="AVGOrders"/>
+</Record>
+<Record Type="UI.DataField">
+<PropertyValue Property="Value" Path="MFHub"/>
+</Record>
+<Record Type="UI.DataField">
+<PropertyValue Property="Value" Path="AVGDistance"/>
+</Record>
+<Record Type="UI.DataField">
+<PropertyValue Property="Value" Path="AVGTime"/>
+</Record>
+</Collection>
+</PropertyValue>
+</Record>
+</Annotation>
+<Annotation Term="UI.HeaderInfo">
+<Record Type="UI.HeaderInfoType">
+<PropertyValue Property="Title">
+<Record Type="UI.DataField">
+<PropertyValue Property="Value" Path="AVGOrders"/>
+</Record>
+</PropertyValue>
+<PropertyValue Property="TypeName" String="Orders_Statistic"/>
+<PropertyValue Property="TypeNamePlural" String="Orders_Statistics"/>
+</Record>
+</Annotation>
+<Annotation Term="UI.LineItem">
+<Collection>
+<Record Type="UI.DataField">
+<PropertyValue Property="Value" Path="AVGOrders"/>
+</Record>
+<Record Type="UI.DataField">
+<PropertyValue Property="Value" Path="MFHub"/>
+</Record>
+<Record Type="UI.DataField">
+<PropertyValue Property="Value" Path="AVGDistance"/>
+</Record>
+<Record Type="UI.DataField">
+<PropertyValue Property="Value" Path="AVGTime"/>
+</Record>
+</Collection>
+</Annotation>
+<Annotation Term="UI.SelectionFields">
+<Collection>
+<PropertyPath>AVGOrders</PropertyPath>
+<PropertyPath>MFHub</PropertyPath>
+<PropertyPath>AVGDistance</PropertyPath>
+<PropertyPath>AVGTime</PropertyPath>
+</Collection>
+</Annotation>
+</Annotations>
+<Annotations Target="letstrackservice.Route">
+<Annotation Term="UI.Facets">
+<Collection>
+<Record Type="UI.CollectionFacet">
+<PropertyValue Property="Label" String="Value Info"/>
+<PropertyValue Property="Facets">
+<Collection>
+<Record Type="UI.ReferenceFacet">
+<PropertyValue Property="Target" AnnotationPath="@UI.FieldGroup#Main"/>
+<PropertyValue Property="Label" String="Main Facet"/>
+</Record>
+</Collection>
+</PropertyValue>
+</Record>
+</Collection>
+</Annotation>
+<Annotation Term="UI.FieldGroup" Qualifier="Main">
+<Record Type="UI.FieldGroupType">
+<PropertyValue Property="Data">
+<Collection>
+<Record Type="UI.DataField">
+<PropertyValue Property="Value" Path="Id"/>
+</Record>
+<Record Type="UI.DataField">
+<PropertyValue Property="Value" Path="Time"/>
+</Record>
+<Record Type="UI.DataField">
+<PropertyValue Property="Value" Path="Distance"/>
+</Record>
+</Collection>
+</PropertyValue>
+</Record>
+</Annotation>
+<Annotation Term="UI.HeaderInfo">
+<Record Type="UI.HeaderInfoType">
+<PropertyValue Property="Description">
+<Record Type="UI.DataField">
+<PropertyValue Property="Value" Path="Distance"/>
+</Record>
+</PropertyValue>
+<PropertyValue Property="Title">
+<Record Type="UI.DataField">
+<PropertyValue Property="Value" Path="Id"/>
+</Record>
+</PropertyValue>
+<PropertyValue Property="TypeName" String="Route"/>
+<PropertyValue Property="TypeNamePlural" String="Routes"/>
+</Record>
+</Annotation>
+<Annotation Term="UI.LineItem">
+<Collection>
+<Record Type="UI.DataField">
+<PropertyValue Property="Value" Path="Id"/>
+</Record>
+<Record Type="UI.DataField">
+<PropertyValue Property="Value" Path="Time"/>
+</Record>
+<Record Type="UI.DataField">
+<PropertyValue Property="Value" Path="Distance"/>
+</Record>
+</Collection>
+</Annotation>
+<Annotation Term="UI.SelectionFields">
+<Collection>
+<PropertyPath>Id</PropertyPath>
+<PropertyPath>Time</PropertyPath>
+<PropertyPath>Distance</PropertyPath>
+</Collection>
+</Annotation>
+</Annotations>
+<Annotations Target="letstrackservice.Route_Statistics">
+<Annotation Term="UI.Facets">
+<Collection>
+<Record Type="UI.CollectionFacet">
+<PropertyValue Property="Label" String="Value Info"/>
+<PropertyValue Property="Facets">
+<Collection>
+<Record Type="UI.ReferenceFacet">
+<PropertyValue Property="Target" AnnotationPath="@UI.FieldGroup#Main"/>
+<PropertyValue Property="Label" String="Main Facet"/>
+</Record>
+</Collection>
+</PropertyValue>
+</Record>
+</Collection>
+</Annotation>
+<Annotation Term="UI.FieldGroup" Qualifier="Main">
+<Record Type="UI.FieldGroupType">
+<PropertyValue Property="Data">
+<Collection>
+<Record Type="UI.DataField">
+<PropertyValue Property="Value" Path="AVGDistance"/>
+</Record>
+<Record Type="UI.DataField">
+<PropertyValue Property="Value" Path="AVGTime"/>
+</Record>
+</Collection>
+</PropertyValue>
+</Record>
+</Annotation>
+<Annotation Term="UI.HeaderInfo">
+<Record Type="UI.HeaderInfoType">
+<PropertyValue Property="Title">
+<Record Type="UI.DataField">
+<PropertyValue Property="Value" Path="AVGDistance"/>
+</Record>
+</PropertyValue>
+<PropertyValue Property="TypeName" String="Route_Statistic"/>
+<PropertyValue Property="TypeNamePlural" String="Route_Statistics"/>
+</Record>
+</Annotation>
+<Annotation Term="UI.LineItem">
+<Collection>
+<Record Type="UI.DataField">
+<PropertyValue Property="Value" Path="AVGDistance"/>
+</Record>
+<Record Type="UI.DataField">
+<PropertyValue Property="Value" Path="AVGTime"/>
+</Record>
+</Collection>
+</Annotation>
+<Annotation Term="UI.SelectionFields">
+<Collection>
+<PropertyPath>AVGDistance</PropertyPath>
+<PropertyPath>AVGTime</PropertyPath>
+</Collection>
+</Annotation>
+</Annotations>
+<Annotations Target="letstrackservice.Route_Statistics/AVGDistance">
+<Annotation Term="Core.Computed" Bool="true"/>
+</Annotations>
+<Annotations Target="letstrackservice.Route_Statistics/AVGTime">
+<Annotation Term="Core.Computed" Bool="true"/>
+</Annotations>
+<Annotations Target="letstrackservice.StatCust">
+<Annotation Term="UI.Facets">
+<Collection>
+<Record Type="UI.CollectionFacet">
+<PropertyValue Property="Label" String="Value Info"/>
+<PropertyValue Property="Facets">
+<Collection>
+<Record Type="UI.ReferenceFacet">
+<PropertyValue Property="Target" AnnotationPath="@UI.FieldGroup#Main"/>
+<PropertyValue Property="Label" String="Main Facet"/>
+</Record>
+</Collection>
+</PropertyValue>
+</Record>
+</Collection>
+</Annotation>
+<Annotation Term="UI.FieldGroup" Qualifier="Main">
+<Record Type="UI.FieldGroupType">
+<PropertyValue Property="Data">
+<Collection>
+<Record Type="UI.DataField">
+<PropertyValue Property="Value" Path="Customer"/>
+</Record>
+<Record Type="UI.DataField">
+<PropertyValue Property="Value" Path="Name"/>
+</Record>
+<Record Type="UI.DataField">
+<PropertyValue Property="Value" Path="AVGDays"/>
+</Record>
+</Collection>
+</PropertyValue>
+</Record>
+</Annotation>
+<Annotation Term="UI.HeaderInfo">
+<Record Type="UI.HeaderInfoType">
+<PropertyValue Property="Title">
+<Record Type="UI.DataField">
+<PropertyValue Property="Value" Path="Customer"/>
+</Record>
+</PropertyValue>
+<PropertyValue Property="TypeName" String="StatCust"/>
+<PropertyValue Property="TypeNamePlural" String="StatCusts"/>
+</Record>
+</Annotation>
+<Annotation Term="UI.LineItem">
+<Collection>
+<Record Type="UI.DataField">
+<PropertyValue Property="Value" Path="Customer"/>
+</Record>
+<Record Type="UI.DataField">
+<PropertyValue Property="Value" Path="Name"/>
+</Record>
+<Record Type="UI.DataField">
+<PropertyValue Property="Value" Path="AVGDays"/>
+</Record>
+</Collection>
+</Annotation>
+<Annotation Term="UI.SelectionFields">
+<Collection>
+<PropertyPath>Customer</PropertyPath>
+<PropertyPath>Name</PropertyPath>
+<PropertyPath>AVGDays</PropertyPath>
+</Collection>
+</Annotation>
+</Annotations>
+<Annotations Target="letstrackservice.StatCust/AVGDays">
+<Annotation Term="Core.Computed" Bool="true"/>
+</Annotations>
+<Annotations Target="letstrackservice.Sub_Route">
+<Annotation Term="UI.Facets">
+<Collection>
+<Record Type="UI.CollectionFacet">
+<PropertyValue Property="Label" String="Value Info"/>
+<PropertyValue Property="Facets">
+<Collection>
+<Record Type="UI.ReferenceFacet">
+<PropertyValue Property="Target" AnnotationPath="@UI.FieldGroup#Main"/>
+<PropertyValue Property="Label" String="Main Facet"/>
+</Record>
+</Collection>
+</PropertyValue>
+</Record>
+</Collection>
+</Annotation>
+<Annotation Term="UI.FieldGroup" Qualifier="Main">
+<Record Type="UI.FieldGroupType">
+<PropertyValue Property="Data">
+<Collection>
+<Record Type="UI.DataField">
+<PropertyValue Property="Value" Path="Id"/>
+</Record>
+<Record Type="UI.DataField">
+<PropertyValue Property="Value" Path="Starts"/>
+</Record>
+<Record Type="UI.DataField">
+<PropertyValue Property="Value" Path="Ends"/>
+</Record>
+<Record Type="UI.DataField">
+<PropertyValue Property="Value" Path="Time"/>
+</Record>
+<Record Type="UI.DataField">
+<PropertyValue Property="Value" Path="Distance"/>
+</Record>
+</Collection>
+</PropertyValue>
+</Record>
+</Annotation>
+<Annotation Term="UI.HeaderInfo">
+<Record Type="UI.HeaderInfoType">
+<PropertyValue Property="Description">
+<Record Type="UI.DataField">
+<PropertyValue Property="Value" Path="Starts"/>
+</Record>
+</PropertyValue>
+<PropertyValue Property="Title">
+<Record Type="UI.DataField">
+<PropertyValue Property="Value" Path="Id"/>
+</Record>
+</PropertyValue>
+<PropertyValue Property="TypeName" String="Sub_Route"/>
+<PropertyValue Property="TypeNamePlural" String="Sub_Routes"/>
+</Record>
+</Annotation>
+<Annotation Term="UI.LineItem">
+<Collection>
+<Record Type="UI.DataField">
+<PropertyValue Property="Value" Path="Id"/>
+</Record>
+<Record Type="UI.DataField">
+<PropertyValue Property="Value" Path="Starts"/>
+</Record>
+<Record Type="UI.DataField">
+<PropertyValue Property="Value" Path="Ends"/>
+</Record>
+<Record Type="UI.DataField">
+<PropertyValue Property="Value" Path="Time"/>
+</Record>
+<Record Type="UI.DataField">
+<PropertyValue Property="Value" Path="Distance"/>
+</Record>
+</Collection>
+</Annotation>
+<Annotation Term="UI.SelectionFields">
+<Collection>
+<PropertyPath>Id</PropertyPath>
+<PropertyPath>Starts</PropertyPath>
+<PropertyPath>Ends</PropertyPath>
+</Collection>
+</Annotation>
+</Annotations>
+<Annotations Target="letstrackservice.Sub_Route_Statistics">
+<Annotation Term="UI.Facets">
+<Collection>
+<Record Type="UI.CollectionFacet">
+<PropertyValue Property="Label" String="Value Info"/>
+<PropertyValue Property="Facets">
+<Collection>
+<Record Type="UI.ReferenceFacet">
+<PropertyValue Property="Target" AnnotationPath="@UI.FieldGroup#Main"/>
+<PropertyValue Property="Label" String="Main Facet"/>
+</Record>
+</Collection>
+</PropertyValue>
+</Record>
+</Collection>
+</Annotation>
+<Annotation Term="UI.FieldGroup" Qualifier="Main">
+<Record Type="UI.FieldGroupType">
+<PropertyValue Property="Data">
+<Collection>
+<Record Type="UI.DataField">
+<PropertyValue Property="Value" Path="AVGDistance"/>
+</Record>
+<Record Type="UI.DataField">
+<PropertyValue Property="Value" Path="AVGTime"/>
+</Record>
+</Collection>
+</PropertyValue>
+</Record>
+</Annotation>
+<Annotation Term="UI.HeaderInfo">
+<Record Type="UI.HeaderInfoType">
+<PropertyValue Property="Title">
+<Record Type="UI.DataField">
+<PropertyValue Property="Value" Path="AVGDistance"/>
+</Record>
+</PropertyValue>
+<PropertyValue Property="TypeName" String="Sub_Route_Statistic"/>
+<PropertyValue Property="TypeNamePlural" String="Sub_Route_Statistics"/>
+</Record>
+</Annotation>
+<Annotation Term="UI.LineItem">
+<Collection>
+<Record Type="UI.DataField">
+<PropertyValue Property="Value" Path="AVGDistance"/>
+</Record>
+<Record Type="UI.DataField">
+<PropertyValue Property="Value" Path="AVGTime"/>
+</Record>
+</Collection>
+</Annotation>
+<Annotation Term="UI.SelectionFields">
+<Collection>
+<PropertyPath>AVGDistance</PropertyPath>
+<PropertyPath>AVGTime</PropertyPath>
+</Collection>
+</Annotation>
+</Annotations>
+<Annotations Target="letstrackservice.Sub_Route_Statistics/AVGDistance">
+<Annotation Term="Core.Computed" Bool="true"/>
+</Annotations>
+<Annotations Target="letstrackservice.Sub_Route_Statistics/AVGTime">
+<Annotation Term="Core.Computed" Bool="true"/>
+</Annotations>
+</Schema>
+</edmx:DataServices>
+</edmx:Edmx>

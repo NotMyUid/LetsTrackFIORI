@@ -1,0 +1,334 @@
+{
+  "_version": "1.12.0",
+  "sap.app": {
+    "id": "lt.appfiori",
+    "type": "application",
+    "i18n": "i18n/i18n.properties",
+    "title": "{{appTitle}}",
+    "description": "{{appDescription}}",
+    "applicationVersion": {
+      "version": "1.0.0"
+    },
+    "ach": "set-ach",
+    "resources": "resources.json",
+    "dataSources": {
+      "mainService": {
+        "uri": "letstrackservice/",
+        "type": "OData",
+        "settings": {
+          "odataVersion": "4.0",
+          "localUri": "localService/metadata.xml"
+        }
+      }
+    }
+  },
+  "sap.fiori": {
+    "registrationIds": [],
+    "archeType": "transactional"
+  },
+  "sap.ui": {
+    "technology": "UI5",
+    "icons": {
+      "icon": "sap-icon://task",
+      "favIcon": "",
+      "phone": "",
+      "phone@2": "",
+      "tablet": "",
+      "tablet@2": ""
+    },
+    "deviceTypes": {
+      "desktop": true,
+      "tablet": true,
+      "phone": true
+    }
+  },
+  "sap.ui5": {
+    "rootView": {
+      "viewName": "lt.appfiori.view.App",
+      "type": "XML",
+      "async": true,
+      "id": "app"
+    },
+    "dependencies": {
+      "minUI5Version": "1.66.0",
+      "libs": {
+        "sap.ui.core": {},
+        "sap.m": {},
+        "sap.f": {}
+      }
+    },
+    "contentDensities": {
+      "compact": true,
+      "cozy": true
+    },
+    "models": {
+      "i18n": {
+        "type": "sap.ui.model.resource.ResourceModel",
+        "settings": {
+          "bundleName": "lt.appfiori.i18n.i18n"
+        }
+      },
+      "": {
+        "dataSource": "mainService",
+        "preload": true,
+        "settings": {
+          "operationMode": "Server",
+          "groupId": "$direct",
+          "synchronizationMode": "None",
+          "autoExpandSelect": true
+        }
+      }
+    },
+    "routing": {
+      "config": {
+        "routerClass": "sap.m.routing.Router",
+        "viewType": "XML",
+        "viewPath": "lt.appfiori.view",
+        "controlId": "app",
+        "controlAggregation": "pages",
+        "bypassed": {
+          "target": [
+            "notFound"
+          ]
+        },
+        "async": true
+      },
+      "routes": [
+        {
+          "pattern": "",
+          "name": "index",
+          "target": [
+            "index"
+          ]          
+        },          
+        {
+          "pattern": "Worklist",
+          "name": "worklist",
+          "target": [
+            "worklist"
+          ]
+        },
+        {
+          "pattern": "Orders{objectId}",
+          "name": "object",
+          "target": [
+            "object"
+          ]
+        },
+        {
+          "pattern": "StatCust",
+          "name": "statcust",
+          "target": [
+            "statcust"
+          ]
+        },
+        {
+          "pattern": "StatCust{emailId}",
+          "name": "email",
+          "target": [
+            "email"
+          ]
+        },        
+        {
+          "pattern": "Customer",
+          "name": "customer",
+          "target": [
+            "customer"
+          ]
+        },
+        {
+          "pattern": "Hub",
+          "name": "hub",
+          "target": [
+            "hub"
+          ]
+        },
+        {
+          "pattern": "Carrier",
+          "name": "carrier",
+          "target": [
+            "carrier"
+          ]
+        },        
+        {
+          "pattern": "Route",
+          "name": "route",
+          "target": [
+            "route"
+          ]
+        },
+        {
+          "pattern": "Sub_Route",
+          "name": "sub_route",
+          "target": [
+            "sub_route"
+          ]
+        },
+        {
+          "pattern": "Connections",
+          "name": "connections",
+          "target": [
+            "connections"
+          ]
+        },
+        {
+          "pattern": "City",
+          "name": "city",
+          "target": [
+            "city"
+          ]
+        },        
+        {
+            "pattern": "History",
+            "name" : "history",
+            "target" : [
+                "history"
+            ]
+        },        
+        {
+            "pattern": "Orders_Statistics",
+            "name" : "orders_statistics",
+            "target" : [
+                "orders_statistics"
+            ]
+        },        
+        {
+            "pattern": "OrdStat",
+            "name" : "ordstat",
+            "target" : [
+                "ordstat"
+            ]
+        },        
+        {
+            "pattern": "Customer_Statistics",
+            "name" : "customer_statistics",
+            "target" : [
+                "customer_statistics"
+            ]
+        },        
+        {
+            "pattern": "History_Statistics",
+            "name" : "history_statistics",
+            "target" : [
+                "history_statistics"
+            ]
+        },        
+        {
+            "pattern": "Connection_Statistics",
+            "name" : "connection_statistics",
+            "target" : [
+                "connection_statistics"
+            ]
+        },        
+        {
+            "pattern": "Route_Statistics",
+            "name" : "route_statistics",
+            "target" : [
+                "route_statistics"
+            ]
+        },        
+        {
+            "pattern": "Sub_Route_Statistics",
+            "name" : "sub_route_statistics",
+            "target" : [
+                "sub_route_statistics"
+            ]
+        }
+      ],
+      "targets": {
+        "index": {
+          "viewName": "Index",
+          "viewId": "index"
+        },          
+        "worklist": {
+          "viewName": "Worklist",
+          "viewId": "worklist",
+          "viewLevel": 1,
+          "title": "{i18n>worklistViewTitle}"
+        },
+        "object": {
+          "viewName": "Object",
+          "viewId": "object",
+          "viewLevel": 2,
+          "title": "{i18n>objectViewTitle}"
+        },
+        "statcust": {
+          "viewName": "StatCust",
+          "viewId": "statcust"
+        },
+        "email": {
+          "viewName": "Email",
+          "viewId": "email"
+        },
+        "objectNotFound": {
+          "viewName": "ObjectNotFound",
+          "viewId": "objectNotFound"
+        },
+        "notFound": {
+          "viewName": "NotFound",
+          "viewId": "notFound"
+        },
+        "customer": {
+          "viewName": "Customer",
+          "viewId": "customer"
+        },
+        "hub": {
+          "viewName": "Hub",
+          "viewId": "hub"
+        },
+        "carrier": {
+          "viewName": "Carrier",
+          "viewId": "carrier"
+        },
+        "route": {
+          "viewName": "Route",
+          "viewId": "route"
+        },
+        "sub_route": {
+          "viewName": "Sub_Route",
+          "viewId": "sub_route"
+        },
+        "connections": {
+          "viewName": "Connections",
+          "viewId": "connections"
+        },
+        "city": {
+          "viewName": "City",
+          "viewId": "city"
+        },
+        "history": {
+            "viewName": "History",
+            "viewId": "history"
+        },
+        "orders_statistics": {
+            "viewName": "Orders_Statistics",
+            "viewId": "orders_statistics"
+        },
+        "ordstat": {
+            "viewName": "OrdStat",
+            "viewId": "ordstat"
+        },
+        "customer_statistics": {
+            "viewName": "Customer_Statistics",
+            "viewId": "customer_statistics"
+        },
+        "history_statistics": {
+            "viewName": "History_Statistics",
+            "viewId": "history_statistics"
+        },
+        "connection_statistics": {
+            "viewName": "Connection_Statistics",
+            "viewId": "connection_statistics"
+        },
+        "route_statistics": {
+            "viewName": "Route_Statistics",
+            "viewId": "route_statistics"
+        },
+        "sub_route_statistics": {
+            "viewName": "Sub_Route_Statistics",
+            "viewId": "sub_route_statistics"
+        }
+      }
+    }
+  }
+}

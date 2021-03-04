@@ -1,0 +1,46 @@
+<mvc:View xmlns="sap.m" xmlns:mvc="sap.ui.core.mvc" xmlns:semantic="sap.f.semantic" controllerName="lt.appfiori.controller.Connection_Statistics">
+
+	<semantic:SemanticPage id="page" headerPinnable="false" toggleHeaderOnTitleClick="false">
+
+		<semantic:titleHeading>
+			<Title text="ltapp"/>
+		</semantic:titleHeading>
+
+		<semantic:content>
+			<Table id="table" width="auto" items="{/Connection_Statistics}" noDataText="{worklistView>/htableNoDataText}" growing="true" growingScrollToLoad="true" updateFinished=".onUpdateFinished">
+
+				<headerToolbar>
+					<Toolbar>
+						<Title id="tableHeader" text="Connections_Statistics"/>
+					<content>
+					    <ToolbarSpacer id="spacer1"/>
+					</content>
+					</Toolbar>
+				</headerToolbar>
+
+				<columns>
+					<Column id="column0_1613641845674">
+					    <header>
+					        <Label text="AVG Connection" id="label0_1613641846168"/>
+					    </header>
+					</Column>
+				</columns>
+
+				<items>
+					<ColumnListItem type="Navigation" press=".onPress">
+					<cells>
+					    <Input value="{path:'AVGConnection', type: 'sap.ui.model.odata.type.Decimal'}" width="100%" id="input0" editable="false"/>
+					</cells>
+					</ColumnListItem>
+				</items>
+			</Table>
+		</semantic:content>
+
+		<semantic:sendEmailAction>
+			<semantic:SendEmailAction id="shareEmail" press=".onShareEmailPress"/>
+		</semantic:sendEmailAction>
+
+
+	</semantic:SemanticPage>
+
+</mvc:View>

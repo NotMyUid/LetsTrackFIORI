@@ -1,0 +1,163 @@
+<mvc:View xmlns="sap.m" xmlns:mvc="sap.ui.core.mvc" xmlns:semantic="sap.f.semantic" controllerName="lt.appfiori.controller.Index" height="100%"><semantic:SemanticPage id="page" headerPinnable="false" toggleHeaderOnTitleClick="false">
+
+		<semantic:titleHeading>
+			<Title text="ltapp"/>
+		</semantic:titleHeading>
+
+
+	<semantic:content>
+
+
+	    <App id="app0" height="90%">
+
+
+	        <pages>
+
+
+	            <Page title="TABLES" id="page0">
+
+
+	                <content>
+
+
+	                    <HBox xmlns="sap.m" xmlns:mvc="sap.ui.core.mvc" xmlns:semantic="sap.f.semantic" width="100%" id="hbox0">
+
+
+	                        <items>
+
+
+	                            <Button xmlns="sap.m" text="Orders" id="button8" press=".onOrders"/>
+
+
+	                            <Button xmlns="sap.m" text="History" id="button6" press=".onHistory"/>
+
+
+	                            <Button xmlns="sap.m" text="Customer" id="button7" press=".onUser"/>
+
+
+	                            <Button xmlns="sap.m" text="Hub" id="button9" press=".onHub"/>
+
+
+	                            <Button xmlns="sap.m" text="Carrier" id="button0" press=".onCarrier"/>
+
+
+	                            <Button xmlns="sap.m" id="button11" text="Route" press=".onRoute"/>
+
+
+	                            <Button xmlns="sap.m" text="Sub_Route" id="button12" press=".onSub_Route"/>
+
+
+	                            <Button xmlns="sap.m" text="Connections" id="button13" press=".onConnections"/>
+
+
+	                            <Button xmlns="sap.m" text="City" id="button14" press=".onCity"/>
+
+
+	                            </items>
+
+
+	                        
+
+
+	                    </HBox>
+
+
+	                    <App id="app1" height="50%">
+
+
+	                        <pages>
+
+
+	                            <Page title="STATISTICS" id="page2" showFooter="false" enableScrolling="false">
+
+
+	                                <content>
+
+
+	                                    <HBox width="100%" id="hbox3">
+
+
+	                                        <items>
+
+
+	                                            <Button xmlns="sap.m" text="Orders" id="button13_1613644853800" press=".onOrdersStatistics"/>
+
+
+	                                            <Button xmlns="sap.m" text="History" id="button14_1613644876413" press=".onHistoryStatistics"/>
+
+
+	                                            <Button xmlns="sap.m" text="Customer" id="button15" press=".onCustomerStatistics"/>
+
+
+	                                            <Button xmlns="sap.m" text="Route" id="button16" press=".onRouteStatistics"/>
+
+
+	                                            <Button xmlns="sap.m" text="Sub_Route" id="button17" press=".onSub_RouteStatistics"/>
+
+
+	                                            <Button xmlns="sap.m" text="Connections" id="button18" press=".onConnectionStatistics"/>
+
+
+	                                        </items>
+
+
+	                                    </HBox>
+
+
+	                                    <App id="app0_1613739379538">
+
+
+	                                        <pages>
+
+
+	                                            <Page title="AD-HOC STATISTICS" id="page0_1613739379536" enableScrolling="false">
+
+
+	                                                <content>
+
+
+	                                                    <Text xmlns="sap.m" text="Insert customer mail:" id="text4"/><SearchField xmlns="sap.m" placeholder="Search for ..." id="field0" width="50%" search=".onStatCust"/>
+
+
+	                                                </content>
+
+
+	                                            </Page>
+
+
+	                                            <Page title="Page 2" id="page1_1613739379538"/></pages>
+
+
+	                                    </App>
+
+
+	                                </content>
+
+
+	                            </Page>
+
+
+	                            <Page title="Page 2" id="page3"/></pages>
+
+
+	                    </App>
+
+
+	                </content>
+
+
+	            </Page>
+
+
+	            <Page title="Page 2" id="page1"/></pages>
+
+
+	    </App>
+
+
+	</semantic:content>
+
+
+	</semantic:SemanticPage>
+
+</mvc:View>

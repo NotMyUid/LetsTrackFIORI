@@ -1,0 +1,73 @@
+<mvc:View xmlns="sap.m" xmlns:mvc="sap.ui.core.mvc" xmlns:semantic="sap.f.semantic" controllerName="lt.appfiori.controller.History">
+
+	<semantic:SemanticPage id="page" headerPinnable="false" toggleHeaderOnTitleClick="false">
+
+		<semantic:titleHeading>
+			<Title text="ltapp"/>
+		</semantic:titleHeading>
+
+		<semantic:content>
+			<Table id="table" width="auto" items="{/History}" noDataText="{worklistView>/htableNoDataText}" growing="true" growingScrollToLoad="true" updateFinished=".onUpdateFinished">
+
+				<headerToolbar>
+					<Toolbar>
+						<Title id="tableHeader" text="History"/>
+					<content>
+					    <ToolbarSpacer id="spacer1"/>
+                        <Text xmlns="sap.m" text="Search order:" id="text6"/>
+					    <SearchField id="searchField" tooltip="{i18n>historytSearchTooltip}" search=".onSearch" width="20%" placeholder="Find..">
+						</SearchField>
+					</content>
+					</Toolbar>
+				</headerToolbar>
+
+				<columns>
+					<Column id="column5">
+					    <header>
+					        <Label text="Id" id="label5"/>
+					    </header>
+					</Column>
+					<Column id="column6">
+					    <header>
+					        <Label text="Order" id="label6"/>
+					    </header>
+					</Column>
+					<Column id="column7">
+					    <header>
+					        <Label text="City" id="label7"/>
+					    </header>
+					</Column>
+					<Column id="column8">
+					    <header>
+					        <Label text="Time" id="label8"/>
+					    </header>
+					</Column>
+					<Column id="column9">
+					    <header>
+					        <Label text="Date" id="label9"/>
+					    </header>
+					</Column>
+				</columns>
+
+				<items>
+					<ColumnListItem type="Navigation" press=".onPress">
+					<cells>
+					    <Input value="{path:'Id', type: 'sap.ui.model.odata.type.Int32'}" width="100%" id="input5" editable="false"/>
+					    <Input value="{path:'Order_', type: 'sap.ui.model.odata.type.Int32'}" width="100%" id="input6" editable="false"/>
+					    <Input value="{path:'City', type: 'sap.ui.model.odata.type.Int32'}" width="100%" id="input7" editable="false"/>
+					    <Input value="{path:'Time', type: 'sap.ui.model.odata.type.Timeofday'}" width="100%" id="input8" editable="false"/>
+					    <Input ariaLabelledBy="__label8" value="{path:'Date', type: 'sap.ui.model.odata.type.Date'}" width="100%" id="input9" editable="false"/>
+					</cells>
+					</ColumnListItem>
+				</items>
+			</Table>
+		</semantic:content>
+
+		<semantic:sendEmailAction>
+			<semantic:SendEmailAction id="shareEmail" press=".onShareEmailPress"/>
+		</semantic:sendEmailAction>
+
+
+	</semantic:SemanticPage>
+
+</mvc:View>

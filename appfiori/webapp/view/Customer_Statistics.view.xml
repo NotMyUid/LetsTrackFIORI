@@ -1,0 +1,58 @@
+<mvc:View xmlns="sap.m" xmlns:mvc="sap.ui.core.mvc" xmlns:semantic="sap.f.semantic" controllerName="lt.appfiori.controller.Customer_Statistics">
+
+	<semantic:SemanticPage id="page" headerPinnable="false" toggleHeaderOnTitleClick="false">
+
+		<semantic:titleHeading>
+			<Title text="ltapp"/>
+		</semantic:titleHeading>
+
+		<semantic:content>
+			<Table id="table" width="auto" items="{/Customer_Statistics}" noDataText="{worklistView>/htableNoDataText}" growing="true" growingScrollToLoad="true" updateFinished=".onUpdateFinished">
+
+				<headerToolbar>
+					<Toolbar>
+						<Title id="tableHeader" text="Customer_Statistics"/>
+					<content>
+					    <ToolbarSpacer id="spacer1"/>
+					</content>
+					</Toolbar>
+				</headerToolbar>
+
+				<columns>
+					<Column id="column0">
+					    <header>
+					        <Label text="AVG Len M" id="label0"/>
+					    </header>
+					</Column>
+					<Column id="column1">
+					    <header>
+					        <Label text="AVG Len N" id="label1"/>
+					    </header>
+					</Column>
+					<Column id="column2">
+					    <header>
+					        <Label text="AVG Len P" id="label2"/>
+					    </header>
+					</Column>
+				</columns>
+
+				<items>
+					<ColumnListItem type="Navigation" press=".onPress">
+					<cells>
+					    <Input value="{path:'AVGLenM', type: 'sap.ui.model.odata.type.Decimal'}" width="100%" id="input0" editable="false"/>
+					    <Input value="{path:'AVGLenN', type: 'sap.ui.model.odata.type.Decimal'}" width="100%" id="input1" editable="false"/>
+					    <Input value="{path:'AVGLenP', type: 'sap.ui.model.odata.type.Decimal'}" width="100%" id="input2_1613641238161" editable="false"/>
+					</cells>
+					</ColumnListItem>
+				</items>
+			</Table>
+		</semantic:content>
+
+		<semantic:sendEmailAction>
+			<semantic:SendEmailAction id="shareEmail" press=".onShareEmailPress"/>
+		</semantic:sendEmailAction>
+
+
+	</semantic:SemanticPage>
+
+</mvc:View>

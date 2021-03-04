@@ -1,0 +1,81 @@
+<mvc:View xmlns="sap.m" xmlns:mvc="sap.ui.core.mvc" xmlns:semantic="sap.f.semantic" controllerName="lt.appfiori.controller.City">
+
+	<semantic:SemanticPage id="page" headerPinnable="false" toggleHeaderOnTitleClick="false">
+
+		<semantic:titleHeading>
+			<Title text="ltapp"/>
+		</semantic:titleHeading>
+
+		<semantic:content>
+			<Table id="table" width="auto" items="{/City}" noDataText="{worklistView>/htableNoDataText}" growing="true" growingScrollToLoad="true" updateFinished=".onUpdateFinished">
+
+				<headerToolbar>
+					<Toolbar>
+						<Title id="tableHeader" text="City"/>
+					<content>
+					    <ToolbarSpacer id="spacer1"/>
+                        <Text xmlns="sap.m" text="Search city:" id="text6"/>
+					    <SearchField id="searchField" tooltip="{i18n>historytSearchTooltip}" search=".onSearch" width="20%" placeholder="Find..">
+						</SearchField>
+					</content>
+					</Toolbar>
+				</headerToolbar>
+
+				<columns>
+					
+				<Column id="column0">
+					
+				    <header>
+					
+				        <Label text="Id" id="label0"/>
+					
+				    </header>
+					
+				</Column>
+					
+				<Column id="column1">
+					
+				    <header>
+					
+				        <Label text="Name" id="label1"/>
+					
+				    </header>
+					
+				</Column>
+					
+				<Column id="column0_1613143876528">
+					
+				    <header>
+					
+				        <Label text="Location" id="label0_1613143877268"/>
+					
+				    </header>
+					
+				</Column>
+					
+				</columns>
+
+				<items>
+					<ColumnListItem type="Navigation" press=".onPress">
+					<cells>
+					    
+					<Input value="{path:'Id', type: 'sap.ui.model.odata.type.Int32'}" width="100%" id="input0" editable="false"/>
+					    
+					<Input value="{Name}" width="100%" id="input1" editable="false"/>
+					    
+					<Input value="{Location}" width="100%" id="input0_1613143876162" editable="false"/>
+					    
+					</cells>
+					</ColumnListItem>
+				</items>
+			</Table>
+		</semantic:content>
+
+		<semantic:sendEmailAction>
+			<semantic:SendEmailAction id="shareEmail" press=".onShareEmailPress"/>
+		</semantic:sendEmailAction>
+
+
+	</semantic:SemanticPage>
+
+</mvc:View>
